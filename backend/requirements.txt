@@ -1,0 +1,9 @@
+fastapi
+langchain-community
+langchain-core
+langchain-groq
+langchain-text-splitters
+pydantic
+requests
+uvicorn
+python-dotenv
