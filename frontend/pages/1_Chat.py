@@ -5,6 +5,7 @@ from utils import mermaid_to_encoded_string
 st.set_page_config(page_title="ER diagram AI",page_icon='https://cdn-icons-png.flaticon.com/64/11629/11629055.png')
 st.sidebar.header("ER diagram AI 🟦─<🟧")
 
+url=st.secrets['url'] or "http://localhost:8000/"
 
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history=[]
@@ -23,7 +24,7 @@ if api_key:
 st.sidebar.markdown("---")  
 if st.sidebar.button("New Conversation"):
     try:
-        data=requests.post(st.secrets['url']+"refresh",data={"session_id":"1"})
+        data=requests.post(url+"refresh",data={"session_id":"1"})
     except:
         pass
     st.session_state.chat_history = []
@@ -67,7 +68,7 @@ if chat_input:
         placeholder = st.empty()
         placeholder.markdown("💭 _Thinking..._")
         try:
-            data = requests.post(st.secrets['url']+ 'chat', json={"user_input":chat_input,"model":st.session_state.model,'api_key':st.session_state.api_key if st.session_state.api_key else ''})
+            data = requests.post(url+ 'chat', json={"user_input":chat_input,"model":st.session_state.model,'api_key':st.session_state.api_key if st.session_state.api_key else ''})
             data=data.json()
             if 'error' in data:
                 st.error(f"Try for new conversation since Token Limit is exceeded")

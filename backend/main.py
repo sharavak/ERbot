@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from chains import generate_response
@@ -5,15 +8,13 @@ from model import Model
 import json
 import os
 from chains import store
-from dotenv import load_dotenv
-load_dotenv()
 
 
 app=FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv('url')],  
+    allow_origins=[os.getenv('url','*')],  
     allow_methods=["*"],
     allow_headers=["*"],
 )

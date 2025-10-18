@@ -1,18 +1,13 @@
 import streamlit as st
-
 st.set_page_config(page_title="ER diagram AI",page_icon='https://cdn-icons-png.flaticon.com/64/11629/11629055.png')
-
-
 st.title("ER Diagrams")
-
 
 er_code=[]
 for i in st.session_state.chat_history:
     for j in i:
         if j=='er_code' and i[j].strip():
          er_code.append(i[j])
-         
-
+       
 if not er_code:
     st.info("No ER diagrams yet. Go to Chat first.")
 
